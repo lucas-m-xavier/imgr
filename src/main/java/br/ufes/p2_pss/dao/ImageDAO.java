@@ -31,6 +31,66 @@ public class ImageDAO {
         this.conn = conn;
     }
     
+    public Image findImageById(int id) throws Exception {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        try {
+            String SQL = "select image.* from image where idImage = ? ";
+                               
+            ps = conn.prepareStatement(SQL);
+            
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            
+            Image image = new Image();
+            
+            while(rs.next()) {
+                //User user = new User();
+                image.setId(rs.getInt(1));
+                image.setSource(rs.getString(2));
+                image.setName(rs.getString(3));
+            }
+            
+            return image;
+                                  
+        } catch (SQLException sqle) {
+            throw new Exception("Erro: " + sqle);
+        } finally {
+            ConnectionSQL.closeConnection(conn, ps);
+        }
+    }
+    
+    public Image findImageByName(String name) throws Exception {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        try {
+            String SQL = "select image.* from image where name = ? ";
+                               
+            ps = conn.prepareStatement(SQL);
+            
+            ps.setString(1, name);
+            rs = ps.executeQuery();
+            
+            Image image = new Image();
+            
+            while(rs.next()) {
+                //User user = new User();
+                image.setId(rs.getInt(1));
+                image.setSource(rs.getString(2));
+                image.setName(rs.getString(3));
+            }
+            
+            return image;
+                                  
+        } catch (SQLException sqle) {
+            throw new Exception("Erro: " + sqle);
+        } finally {
+            ConnectionSQL.closeConnection(conn, ps);
+        }
+    }
+    
     public Image findImageBySource(String source) throws Exception {
         PreparedStatement ps = null;
         ResultSet rs = null;

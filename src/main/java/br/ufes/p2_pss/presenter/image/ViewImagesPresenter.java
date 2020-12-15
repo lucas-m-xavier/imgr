@@ -5,6 +5,8 @@
  */
 package br.ufes.p2_pss.presenter.image;
 
+import br.ufes.p2_pss.business.memento.ImageMemento;
+import br.ufes.p2_pss.business.memento.JanitorImage;
 import br.ufes.p2_pss.presenter.requestaccess.RequestAcessPresenter;
 import br.ufes.p2_pss.model.Image;
 import br.ufes.p2_pss.model.Permission;
@@ -17,7 +19,6 @@ import br.ufes.p2_pss.util.Renderer;
 import br.ufes.p2_pss.view.Home;
 import br.ufes.p2_pss.view.image.ViewImages;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,9 +38,12 @@ public class ViewImagesPresenter {
     private final User user;
     
     DefaultListModel dlm = new DefaultListModel();
+    
+    private JanitorImage janitorImage;
 
     public ViewImagesPresenter(HomePresenter home) throws Exception {
         this.home = home;
+        janitorImage = new JanitorImage();
         this.view = new ViewImages();
         this.user = home.getUser();
         this.populate();
@@ -59,6 +63,7 @@ public class ViewImagesPresenter {
         this.view.getBtnDelete().addActionListener((ActionEvent arg0) -> {
             try {
                 this.deleteImage();
+                this.populate();
             } catch (Exception ex) {
                 Logger.getLogger(ViewImagesPresenter.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -67,6 +72,16 @@ public class ViewImagesPresenter {
         this.view.getBtnDeleteAll().addActionListener((ActionEvent arg0) -> {
             try {
                 this.deleteAllImages();
+                this.populate();
+            } catch (Exception ex) {
+                Logger.getLogger(ViewImagesPresenter.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
+        this.view.getBtnUndo().addActionListener((ActionEvent arg0) -> {
+            try {
+                this.undo();
+                this.populate();
             } catch (Exception ex) {
                 Logger.getLogger(ViewImagesPresenter.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -88,6 +103,20 @@ public class ViewImagesPresenter {
         });
         
         this.view.setVisible(true);
+    }
+    
+    private void undo() throws Exception {
+        
+        ImageMemento imageMemento = janitorImage.getLast();
+        
+            Image image = new Image();
+            image.setName(imageMemento.getName());
+            image.setSource(imageMemento.getPath());
+            ImageService imageService = new ImageService();
+            imageService.save(image);
+        
+            this.populate();
+        
     }
     
     private void populate() throws Exception {
@@ -149,7 +178,8 @@ public class ViewImagesPresenter {
                 
                 if (response == JOptionPane.YES_OPTION) {
                     try {
-                        
+                        ImageMemento im = new ImageMemento(image.getId(), image.getName(), image.getSource(), false);
+                        janitorImage.addMemento(im);
                         imageService = new ImageService();
                         imageService.delete(image.getId());
                         JOptionPane.showMessageDialog(null, "Imagem deletada com sucesso!");

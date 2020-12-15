@@ -145,6 +145,39 @@ public class UserDAO {
         }
     }
     
+    public User findUserById(int id) throws Exception {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        try {
+            String SQL = "select user.* from user where idUser = ? ";
+                               
+            ps = conn.prepareStatement(SQL);
+            
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            
+            User user = new User();
+            
+            while(rs.next()) {
+                //User user = new User();
+                user.setId(rs.getInt(1));
+                user.setUsername(rs.getString(2));
+                user.setPassword(rs.getString(3));
+                
+                user.setUserState(new CommonState(user));
+                if("Administrador".equals(rs.getString(4))) user.setUserState(new AdminState(user));
+            }
+            
+            return user;
+                                  
+        } catch (SQLException sqle) {
+            throw new Exception("Erro: " + sqle);
+        } finally {
+            ConnectionSQL.closeConnection(conn, ps);
+        }
+    }
+    
     public void saveAdmin(User user) throws Exception {
         PreparedStatement ps = null;
 

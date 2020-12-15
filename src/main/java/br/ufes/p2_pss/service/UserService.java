@@ -23,6 +23,10 @@ public class UserService {
         this.userRepository = new UserRepository();
     }
     
+    public User findUserById(int id) throws Exception {
+        return userRepository.findUserById(id);
+    }
+    
     public ArrayList<User> getAll() throws Exception {
         return this.userRepository.getAll();
     }

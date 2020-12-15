@@ -21,6 +21,10 @@ public class UserRepository {
         this.userDAO = new UserDAO();
     }
     
+    public User findUserById(int id) throws Exception {
+        return userDAO.findUserById(id);
+    }
+    
     public ArrayList<User> getAll () throws Exception {
         return userDAO.getAll();
     }

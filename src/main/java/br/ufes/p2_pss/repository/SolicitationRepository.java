@@ -6,6 +6,7 @@
 package br.ufes.p2_pss.repository;
 
 import br.ufes.p2_pss.dao.SolicitationDAO;
+import br.ufes.p2_pss.model.Image;
 import br.ufes.p2_pss.model.Solicitation;
 import br.ufes.p2_pss.model.User;
 import java.util.ArrayList;
@@ -23,6 +24,10 @@ public class SolicitationRepository {
     
     public ArrayList<Solicitation> getAllByAdmin(User admin) throws Exception {
         return solicitationDAO.getAllByAdmin(admin);
+    }
+    
+    public Solicitation findSolicitationByImageAndUser(User user, Image image) throws Exception {
+        return solicitationDAO.findSolicitationByImageAndUser(user, image);
     }
     
     public void save(Solicitation solicitation) throws Exception {

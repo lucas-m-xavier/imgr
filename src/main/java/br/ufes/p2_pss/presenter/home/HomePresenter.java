@@ -7,9 +7,11 @@ import br.ufes.p2_pss.presenter.image.ViewImagesPresenter;
 import br.ufes.p2_pss.presenter.user.CRUDUserPresenter;
 import br.ufes.p2_pss.presenter.login.LoginPresenter;
 import br.ufes.p2_pss.presenter.notification.NotificationPresenter;
+import br.ufes.p2_pss.presenter.requestaccess.SolicitationAuthPresenter;
 import br.ufes.p2_pss.service.NotificationService;
 import br.ufes.p2_pss.view.Home;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -39,6 +41,17 @@ public class HomePresenter {
                 homePresenter.home.Desktop.add(a1.getView());
                 a1.getView().setVisible(true);
                 home.getBtnNotification().setText("0");
+            } catch (Exception ex) {
+                Logger.getLogger(HomePresenter.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
+        home.getItemAutorizarAcesso().addActionListener((ActionEvent arg0) -> {
+            SolicitationAuthPresenter a1 = null;
+            try {
+                a1 = new SolicitationAuthPresenter(this.user);
+                homePresenter.home.Desktop.add(a1.getView());
+                a1.getView().setVisible(true);
             } catch (Exception ex) {
                 Logger.getLogger(HomePresenter.class.getName()).log(Level.SEVERE, null, ex);
             }

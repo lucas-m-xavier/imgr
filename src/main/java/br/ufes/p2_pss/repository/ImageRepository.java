@@ -20,6 +20,14 @@ public class ImageRepository {
         this.imageDAO = new ImageDAO();
     }
     
+    public Image findImageById(int id) throws Exception {
+        return imageDAO.findImageById(id);
+    }
+    
+    public Image findImageByName(String name) throws Exception {
+        return imageDAO.findImageByName(name);
+    }
+    
     public Image findImageBySource(String source) throws Exception {
         return imageDAO.findImageBySource(source);
     }

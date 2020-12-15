@@ -2,6 +2,7 @@ br\ufes\p2_pss\model\User.class
 br\ufes\p2_pss\dao\ImageDAO.class
 br\ufes\p2_pss\view\login\Login$1.class
 br\ufes\p2_pss\business\command\ICommandUserPresenter.class
+br\ufes\p2_pss\business\EditedImage.class
 br\ufes\p2_pss\business\state\cruduserstate\UpdateUserPresenter.class
 br\ufes\p2_pss\service\NotificationService.class
 br\ufes\p2_pss\view\notification\NotificationView$1.class
@@ -11,6 +12,7 @@ br\ufes\p2_pss\model\Notification.class
 br\ufes\p2_pss\service\ImageService.class
 br\ufes\p2_pss\view\notification\NotificationView.class
 br\ufes\p2_pss\view\cruduser\AddUpdateUser.class
+br\ufes\p2_pss\view\requestaccess\SolicitationsAuth$1.class
 br\ufes\p2_pss\view\cruduser\AddUpdateUser$2.class
 br\ufes\p2_pss\repository\NotificationRepository.class
 br\ufes\p2_pss\view\cruduser\CRUDUser$2.class
@@ -25,6 +27,7 @@ br\ufes\p2_pss\business\state\userstate\UserState.class
 br\ufes\p2_pss\presenter\user\CRUDUserPresenter.class
 br\ufes\p2_pss\view\login\Login.class
 br\ufes\p2_pss\presenter\notification\NotificationPresenter.class
+br\ufes\p2_pss\view\requestaccess\SolicitationsAuth.class
 br\ufes\p2_pss\view\Home$1.class
 br\ufes\p2_pss\view\Home$4.class
 br\ufes\p2_pss\view\image\ShareImage.class
@@ -35,7 +38,6 @@ br\ufes\p2_pss\view\Home$2.class
 br\ufes\p2_pss\presenter\home\HomePresenter.class
 br\ufes\p2_pss\view\login\Login$3.class
 br\ufes\p2_pss\dao\UserDAO.class
-br\ufes\p2_pss\util\ManipularImagem.class
 br\ufes\p2_pss\view\cruduser\CRUDUser$1.class
 br\ufes\p2_pss\view\Home.class
 br\ufes\p2_pss\Main.class
@@ -54,6 +56,7 @@ br\ufes\p2_pss\view\notification\NotificationView$2.class
 br\ufes\p2_pss\util\Renderer.class
 br\ufes\p2_pss\presenter\requestaccess\RequestAcessPresenter.class
 br\ufes\p2_pss\service\PermissionService.class
+br\ufes\p2_pss\presenter\requestaccess\SolicitationAuthPresenter.class
 br\ufes\p2_pss\dao\NotificationDAO.class
 br\ufes\p2_pss\presenter\user\AddUpdateUserPresenter.class
 br\ufes\p2_pss\repository\PermissionRepository.class
@@ -62,9 +65,11 @@ br\ufes\p2_pss\view\Home$3.class
 br\ufes\p2_pss\business\state\userstate\CommonState.class
 br\ufes\p2_pss\repository\UserRepository.class
 br\ufes\p2_pss\business\command\UpdateCommandUser.class
+br\ufes\p2_pss\business\memento\JanitorImage.class
 br\ufes\p2_pss\dao\PermissionDAO.class
 br\ufes\p2_pss\presenter\image\ViewImagePresenter.class
 br\ufes\p2_pss\util\ImageWithText.class
 br\ufes\p2_pss\presenter\login\LoginPresenter.class
 br\ufes\p2_pss\view\cruduser\AddUpdateUser$1.class
+br\ufes\p2_pss\business\memento\ImageMemento.class
 br\ufes\p2_pss\dao\SolicitationDAO.class

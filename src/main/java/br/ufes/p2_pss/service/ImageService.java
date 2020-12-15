@@ -20,6 +20,14 @@ public class ImageService {
         this.imageRepository = new ImageRepository();
     }
     
+    public Image findImageById(int id) throws Exception {
+        return imageRepository.findImageById(id);
+    }
+    
+    public Image findImageByName(String name) throws Exception {
+        return imageRepository.findImageByName(name);
+    }
+    
     public Image findImageBySource(String source) throws Exception {
         return imageRepository.findImageBySource(source);
     }

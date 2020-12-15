@@ -5,6 +5,7 @@
  */
 package br.ufes.p2_pss.dao;
 
+import br.ufes.p2_pss.model.Image;
 import br.ufes.p2_pss.model.Solicitation;
 import br.ufes.p2_pss.model.User;
 import java.sql.Connection;
@@ -32,12 +33,45 @@ public class SolicitationDAO {
         this.conn = conn;
     }
     
+    public Solicitation findSolicitationByImageAndUser(User user, Image image) throws Exception {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        try {
+            String SQL = "select solicitation.* from solicitation where idUser = ? and idImage = ?";
+                               
+            ps = conn.prepareStatement(SQL);
+            
+            ps.setInt(1, user.getId());
+            ps.setInt(2, image.getId());
+            rs = ps.executeQuery();
+            
+            Solicitation permission = new Solicitation();
+            
+            while(rs.next()) {
+                permission.setId(rs.getInt(1));
+                permission.setIdUser(rs.getInt(2));
+                permission.setIdImage(rs.getInt(3));
+                permission.setShare(rs.getBoolean(4));
+                permission.setView(rs.getBoolean(5));
+                permission.setDelete(rs.getBoolean(6));
+            }
+                
+            return permission;
+                                  
+        } catch (SQLException sqle) {
+            throw new Exception("Erro: " + sqle);
+        } finally {
+            ConnectionSQL.closeConnection(conn, ps);
+        }
+    }
+    
     public ArrayList<Solicitation> getAllByAdmin(User admin) throws Exception {
         PreparedStatement ps = null;
         ResultSet rs = null;
         
         try {
-            String SQL = "select * from permission where idAdmin = ?;";
+            String SQL = "select * from solicitation where idAdmin = ?;";
                                
             ps = conn.prepareStatement(SQL);
             

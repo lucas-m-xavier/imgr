@@ -15,7 +15,7 @@ import br.ufes.p2_pss.service.ImageService;
 import br.ufes.p2_pss.service.NotificationService;
 import br.ufes.p2_pss.service.PermissionService;
 import br.ufes.p2_pss.service.UserService;
-import br.ufes.p2_pss.util.ManipularImagem;
+import br.ufes.p2_pss.business.EditedImage;
 import br.ufes.p2_pss.view.image.ShareImage;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
@@ -83,7 +83,7 @@ public class ShareImagePresenter {
             String dirImage = choose.getSelectedFile().getAbsolutePath();
             image.setSource(dirImage);
             
-            bufferedImage = ManipularImagem.setImagemDimensao(dirImage, 484, 459);
+            bufferedImage = EditedImage.setImage(dirImage, 484, 459);
             this.view.getLblImage().setIcon(new ImageIcon(bufferedImage));
         }
     }
